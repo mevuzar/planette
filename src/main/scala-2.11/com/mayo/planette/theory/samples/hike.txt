@@ -1,0 +1,12 @@
+This is where you can start planing a hike!
+A hike is defined by whatis: it has a place, a time and participants(being an activity).
+What it doesn't define is what does a good planner take into account when he plans a hike:
+1. Do we need to take food <- is the hike long? | is it far from home? |
+   do we have a restaurant nearby? | is the restaurant any good? |
+   do we even want to go to a restaurant? | are we taking the kids? |
+   what would the whether be like?|
+2. Do we need to take water <- is the hike long? | is it far from home? |
+   do we have a kiosks or gas stations nearby? | how many are we? | are we taking the kids?|
+   what would the whether be like?|
+3. Do we know where we want to go?| approximately? | let planette decide? |
+   what would the whether be like?|

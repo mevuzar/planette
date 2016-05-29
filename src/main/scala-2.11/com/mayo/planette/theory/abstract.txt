@@ -1,0 +1,6 @@
+The goal of planette is to help people plan their day to day lives(from functional non fun to leisure).
+Users would have planette plan for them as intrusively as they want it to.
+It means that planette could be granted the power of scheduling missions to people
+manually/semi-automatically/automatically
+Planette uses whatis as the source for universal facts and then adds a good planners' wisdom
+which most people don't have.
