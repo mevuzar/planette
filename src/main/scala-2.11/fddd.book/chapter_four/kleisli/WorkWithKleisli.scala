@@ -18,6 +18,7 @@ object WorkWithKleisli extends App {
     op.map(i => Range(0, i.toInt).map(computation)).toList.flatten
   }
 
+
   val listIntToListStringKli = kleisli(listIntToListString)
   val stringToOptionFilteredKli = kleisli(listStringToOptionStringThroughComputation(s => s.toInt < 4))
   val optionStringToComputedIntKli = kleisli(optionStringToComputedInt(i => i*10))
