@@ -19,13 +19,6 @@ trait Trading[Account, Trade, ClientOrder, Order, Execution, Market] {
 
   def allocate(accounts: List[Account]): TradingOperation[Execution, Trade]
 
-  //    def clientOrders: Kleisli[List, ClientOrder, Order]
-  //
-  //    def execute(market: Market, broker: Account): Kleisli[List, Order, Execution]
-  //
-  //    def allocate(accounts: List[Account]): Kleisli[List, Execution, Trade]
-  //
-
   def tradeGeneration(market: Market, broker: Account, clientAccounts: List[Account]) = {
     val result = for {
       a <- clientOrders.right
@@ -33,11 +26,10 @@ trait Trading[Account, Trade, ClientOrder, Order, Execution, Market] {
       c <- allocate(clientAccounts).right[String]
     } yield c
 
+    result
     clientOrders andThen execute(market, broker) andThen allocate(clientAccounts)
   }
 }
-
-//import fddd.book.chapter_six.ex_6_1.TradeModel._
 
 object App extends App with ExecutionModel with OrderModel with RefModel with TradeModel {
 
@@ -61,7 +53,7 @@ object App extends App with ExecutionModel with OrderModel with RefModel with Tr
 
   val tradeGenerator = Trading.tradeGeneration(HongKong, "jojo", List("jbabo", "nisso", "miko"))
   val result = tradeGenerator.run(List(Map("instrument" -> "juju/2/4-jaja/5/6", "no" -> "12345", "customer" -> "your mom!")))
-  println(result)
+  println(result.getOrElse(null))
 
 }
 
