@@ -4,3 +4,56 @@ It means that planette could be granted the power of scheduling missions to peop
 manually/semi-automatically/automatically
 Planette uses whatis as the source for universal facts and then adds a good planners' wisdom
 which most people don't have.
+
+Objective Constraints:
+Constraints that are hard/impossible to break/bypass(more than now and than if at all).
+Could originate in you environment (working hours, spouse's working hours,
+kid pick-up hours, grocery store opening hours etc.)
+
+In planette, everything is a plan but we distinguish _ sorts of plans:
+1. Long/Middle/Short-term goals:
+    Deterministic - one time:
+    "I would like to learn Aikido next year"
+    "I would like my kid's birthday to be memorable this year"
+    "I would like to a find a job close to home"
+    "I would like to score a career achievement within the next six months"
+    "I would like to get in shape for my ski vacation in 6 weeks"
+    Periodic - scheduled:
+    "I would like my family to go hiking every 2 weeks"
+    "I would like my family to sleep out during the summer/spring once/twice a year"
+    "I would like to go jogging 3 times a week"
+    "I would like to meet with the guys for a beer once in a while"
+    "I would like to go visit my grandma with my family once a month"
+2. Assignments:
+    "Need to fix the car's central lock"
+    "Need to buy new running shoes"
+    "Need to buy kids books in french"
+    "Need to dismantle the car phone base"
+    "Need to find 5 candidate air bnb flats in Berlin this week"
+    "Need to decide on a good flat for Berlin and close the deal"
+    "Need to get the mail every week."
+    "Need to check my car's mileage every 3 months"
+3. Planned Activities:
+    "I want to go to the beach this Saturday"
+    "I want to go to a restaurant/movie/theater/concert with my spouse this week"
+    "I want to take my son to a puppet show this weekend"
+    "I want to go fishing with my dad on Saturday 2 weeks from now"
+
+
+Assignments:
+1. May be impacted by objective constraints(originating in both our
+   personal environment as well as the assignment's nature).
+2. Assignments can be periodic.
+3. Usually one/two step plan.
+
+Planned Activities:
+1. Many time leisure activities.
+2. Multi steps, Usually more than two steps.
+3. May be impacted by objective constraints.
+4. Usually spontaneous(day/s notice).
+
+Long/Middle/Short-term goals:
+Common:
+1. Multi steps, Usually more than three steps.
+2. May be impacted by objective constraints.
+3. May include milestones.
