@@ -1,0 +1,2 @@
+help user define what kind of plan is it(goal, activity or assignment), when is it due,
+what are the difficulties if exist etc.

@@ -46,7 +46,7 @@ Assignments:
 2. Assignments can be periodic.
 3. Usually one/two step plan.
 
-Planned Activities:
+Activities:
 1. Many time leisure activities.
 2. Multi steps, Usually more than two steps.
 3. May be impacted by objective constraints.
