@@ -57,3 +57,20 @@ Common:
 1. Multi steps, Usually more than three steps.
 2. May be impacted by objective constraints.
 3. May include milestones.
+
+##########################################################################################
+
+Deep understanding of our environment/concepts:
+planette robustness depends on its ability to understand the meaning of entities
+plans deal with.
+One way to make that happen is the what-is path, i.e. parsing language to meaning.
+While this attitude is valid, it will take time to accomplish.
+Another way to go at it would mean using people's intelligence in understanding
+and defining entities and contexts.
+A good way (both conceptually and commercially speaking) of doing that is through users'
+communities where people vote for definitions, get points for voting and contributing,
+getting authoritative roles over domains under definition etc.
+Of course, planette should keep essential domains close to chest in order to keep
+these select few under total control.
+
+##########################################################################################
