@@ -1,8 +1,8 @@
 package com.mayo.planette.product
 package scenario
 
-import com.mayo.planette.product.domain.client.ServerOperation
-import com.mayo.planette.product.domain.client.domain.{Account, UserClient}
+import com.mayo.planette.product.domain.client.{CommunicationProtocol, ServerOperation}
+import com.mayo.planette.product.domain.client.domain.{UserInteraction, Account, UserClient}
 
 
 /**
@@ -24,7 +24,11 @@ object UserAccount extends Account {
   override type SignOutRequest = UserCredentials
   override type Credentials = UserCredentials
 
-  override def signUp: ServerOperation[SignUpRequest, Credentials] = ???
+  //val communication: CommunicationProtocol = ???
+
+  override def signUp: ServerOperation[SignUpRequest, Credentials] = { communication =>
+
+  }
 
   override def signIn: ServerOperation[SignInRequest, Credentials] = ???
 

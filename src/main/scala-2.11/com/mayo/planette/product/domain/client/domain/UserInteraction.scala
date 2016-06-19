@@ -28,9 +28,4 @@ trait UserInteraction {
     def getInfo: Info
   }
 
-  trait Questionair[Info] extends UserInfoRequest[Info]
-
-  trait QuestionAnswer[Info] extends UserInfoRequest[Info]
-
-
 }
