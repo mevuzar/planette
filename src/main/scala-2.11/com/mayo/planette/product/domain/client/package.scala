@@ -6,11 +6,10 @@ import scalaz.Kleisli
  * @author yoav @since 6/17/16.
  */
 package object client {
-  trait CommunicationProtocol{
+  trait CommunicationProtocol[Request, Response]{
     type Address
-    type RawResponse
-
-    def run[Request](address: Address): Request => RawResponse
+    def run(address: Address): Request => Response
   }
-  type ServerOperation[A,B] = CommunicationProtocol => A => B
+
+  type ServerOperation[Request, Response] = CommunicationProtocol[Request, Response] => CommunicationProtocol[Request, Response]#Address => Request => Response
 }
