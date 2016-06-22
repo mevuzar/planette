@@ -1,69 +1,53 @@
 package com.mayo.planette.product
 package scenario
 
+import com.mayo.planette.product.client.domain.{Account, UserWishlists}
 
-import java.util.concurrent.TimeUnit
-
-import akka.actor.Actor.Receive
-import akka.actor.{Actor, Props, ActorSystem, ActorSelection}
-import akka.util.Timeout
-import com.mayo.planette.product.domain.client.{CommunicationProtocol, ServerOperation}
-import com.mayo.planette.product.domain.client.domain.{UserInteraction, Account, UserClient}
-
-import scala.concurrent.Future
-
+import scala.util.{Success, Try}
 
 /**
  * @author yoav @since 6/15/16.
  */
-object Signup extends App {
-  val client: UserClient = ???
+trait SignupScript extends ScriptMocker {
+
+  val clientAccount: ScriptAccount
+  val userWishlists: ScriptUserWishlists[clientAccount.AuthenticationToken]
+
+  val mockSignUp = mockWithAspects2[clientAccount.SignUpRequest, userWishlists.AuthenticationToken]
+  val signUpAndSignOut = for {
+    credentials <- clientAccount.signUp(mockSignUp)
+    signOutResult <- clientAccount.signOut(credentials)
+  } yield (credentials, signOutResult)
+
+  val signUpAndCreateWishlist = for {
+    credentials <- clientAccount.signUp(mockSignUp)
+    wishlist <- userWishlists.createWishlist(credentials)(mock[userWishlists.WishlistCreate])
+  } yield wishlist
 
 
-}
+  signUpAndCreateWishlist match {
+    //TODO: use scalacheck here
+    case Success(wishlist) => println("success")
+    case _ => println("failure")
+  }
 
-case class SignUp(name: String, age: Int)
-
-case class UserCredentials(accountId: Int, token: java.util.UUID)
-
-object UserAccount extends Account {
-  override type SignUpRequest = SignUp
-  override type SignInRequest = UserCredentials
-  override type SignOutRequest = UserCredentials
-  override type Credentials = UserCredentials
-
-  //val communication: CommunicationProtocol = ???
-
-  override def signUp: ServerOperation[SignUpRequest, Credentials] = ???
-
-  override def signIn: ServerOperation[SignInRequest, Credentials] = ???
-
-  override def signOut: ServerOperation[SignOutRequest, Boolean] = ???
-}
-
-trait PlainInMemoryCommunicationProtocol[Request] extends CommunicationProtocol[Request, Future[String]] with Actor{
-  override type Address = ActorSelection
-  val system = ActorSystem("plain-in-memory-communication-protocol")
-  implicit val ctxt = system.dispatcher
-
-  override def run(address: Address): (Request) => Future[String] = {
-    def ask(request: Request) = {
-      import akka.pattern.ask
-      //val futureResult = system.actorOf(Props[ActorA]) ? request//address.resolveOne()(Timeout(5, TimeUnit.SECONDS)).flatMap(_.ask(request))
-      //futureResult.map(_.toString)
-
-      Future("")
+  signUpAndSignOut match {
+    //TODO: use scalacheck here
+    case Success((token, _)) => {
+      if (clientAccount.signOut(token).isFailure) println("success")
+      else println("failure")
     }
 
-    ask
+    case _ => println("failure")
   }
 }
 
-//case class InMemoryServerOperation[Request](request: Request, address: ActorSelection) extends
-//PlainInMemoryCommunicationProtocol[Request]{
-//
-//}
-
-class ActorA extends Actor{
-  override def receive: Receive = ???
+trait ScriptAccount extends Account {
+  override type Operation[A, B] = A => Try[B]
 }
+
+trait ScriptUserWishlists[AccountsToken] extends UserWishlists {
+  override type AuthenticationToken = AccountsToken
+  override type Operation[A, B] = A => Try[B]
+}
+

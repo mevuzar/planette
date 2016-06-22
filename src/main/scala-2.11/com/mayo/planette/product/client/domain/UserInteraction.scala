@@ -1,4 +1,4 @@
-package com.mayo.planette.product.domain.client.domain
+package com.mayo.planette.product.client.domain
 
 import akka.stream.scaladsl.Source
 

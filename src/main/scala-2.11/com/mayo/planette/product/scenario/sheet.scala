@@ -7,6 +7,8 @@ import akka.pattern.ask
 import akka.util.Timeout
 
 import scala.concurrent.Future
+import scalaz.Kleisli
+import Kleisli._
 
 /**
  * @author yoav @since 6/20/16.
@@ -16,48 +18,68 @@ object sheet extends App {
   val system = ActorSystem()
   implicit val ctxt = system.dispatcher
 
-  trait CommunicationEffect[Address, Request] {
-    type RawResponse
-    //type Address
-
-    def run: Address => Request => RawResponse
+  trait Deserializer[T]{
+    def deserialize(any: Any): T
   }
 
-  type Address = CommunicationEffect[Address, _]
-  type CoOp[A] = CommunicationEffect[Address, A] => Address => A => CommunicationEffect[_, _]#RawResponse
+  type ServerOperation[A,B] = Kleisli[Deserializer, ServerCommunication[A],  B]
 
-  object CoOp {
-    def apply[A]: CoOp[A] = { communication => {
-      address =>
-        communication.run(address)
-    }
-      
-    }
+  trait ServerCommunication[Request]{
+    type  RawResponse
+
+    def get(request: Request):RawResponse
   }
 
-  object CommunicationEffecti extends CommunicationEffect[ActorRef, String] {
+  trait ServerActorBasedCommunication[Request] extends ServerCommunication[Request]{
     override type RawResponse = Future[String]
+  }
 
-    //override type Address = ActorRef
+  case class SignUp(name: String, age: Int)
 
-    override def run: (ActorRef) => (String) => Future[String] = { actor => { request =>
-      implicit val timeout = Timeout(5, TimeUnit.SECONDS)
-      (actor ? request).map(_.toString)
+  case class UserCredentials(accountId: Int, token: java.util.UUID)
+
+  trait Account {
+    type SignUpRequest
+    type SignInRequest
+    type SignOutRequest
+    type Credentials
+
+    def signUp: ServerOperation[SignUpRequest, Credentials]
+
+    def signIn: ServerOperation[SignInRequest, Credentials]
+
+    def signOut: ServerOperation[SignOutRequest, Boolean]
+  }
+
+  trait UserAccountInterpreter extends Account{
+
+    def deserializer[T]: Deserializer[T]
+    def serverCommunication[T]: ServerCommunication[T]
+
+    override type SignOutRequest = UserCredentials
+    override def signUp: ServerOperation[SignUp, UserCredentials] = kleisli[Deserializer, ServerCommunication[SignUp], UserCredentials]{
+      signUp =>{
+        deserializer[UserCredentials]
+      }
     }
-    }
+
+    override def signIn: ServerOperation[UserCredentials, UserCredentials] = ???
+
+    override def signOut: ServerOperation[UserCredentials, Boolean] = ???
+
+    override type Credentials = UserCredentials
+    override type SignInRequest = UserCredentials
+    override type SignUpRequest = SignUp
   }
 
 
-  def concrete = CoOp[
+  object stam extends UserAccountInterpreter {
+    override def deserializer[T]: Deserializer[T] = ???
 
-  , String]
-  concrete
-  val effct = CommunicationEffecti
-  //  val next = concrete(effct)
-  //  next
-  val response = concrete[](effct)(system.actorOf(Props[StringEchoActor]))("string string")
+    override def serverCommunication[T]: ServerCommunication[T] = ???
 
-  println(s"response: $response")
+
+  }
 }
 
 class StringEchoActor extends Actor {

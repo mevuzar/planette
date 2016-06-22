@@ -1,4 +1,4 @@
-package com.mayo.planette.product.domain.client
+package com.mayo.planette.product.client
 package domain
 
 /**
@@ -9,7 +9,7 @@ Account with
 Planning with
 Discovery with 
 Lessons with 
-Wishlists with
+UserWishlists with
 Recipes{
   def appStart: Unit
 

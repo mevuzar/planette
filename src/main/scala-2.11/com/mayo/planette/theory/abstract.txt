@@ -33,7 +33,7 @@ In planette, everything is a plan but we distinguish _ sorts of plans:
     "Need to decide on a good flat for Berlin and close the deal"
     "Need to get the mail every week."
     "Need to check my car's mileage every 3 months"
-3. Planned Activities:
+3. Activities:
     "I want to go to the beach this Saturday"
     "I want to go to a restaurant/movie/theater/concert with my spouse this week"
     "I want to take my son to a puppet show this weekend"
