@@ -6,8 +6,8 @@ import com.mayo.planette.domain.planning.abstract_dsl.PlanDSL
 /**
  * @author yoav @since 6/21/16.
  */
-trait Wishlists extends PlanDSL{
-  type WishlistCreate
+trait WishlistsService extends PlanDSL{
+  type WishlistCreate <: WishlistMandatoryProperties
   type WishlistUpdate <: WishlistUpdateMandatoryProperties with WithId[WishlistId]
   type Wishlist <: WishlistMandatoryProperties with WithId[WishlistId]
   type WishlistId
@@ -15,13 +15,14 @@ trait Wishlists extends PlanDSL{
   type WishlistItem <: Plan
   type WishlistItemQuestionaire
 
+  trait WishlistMandatoryProperties{
+    val items: List[WishlistItem]
+  }
   trait WishlistUpdateMandatoryProperties{
     val itemsToAdd: List[WishlistItem]
     val itemsToRemove: List[WishlistItem]
   }
-  trait WishlistMandatoryProperties{
-    val items: List[WishlistItem]
-  }
+
 
   type Operation[A,B]
   type AuthenticatedOperation[A,B] = AuthenticationToken => Operation[A,B]

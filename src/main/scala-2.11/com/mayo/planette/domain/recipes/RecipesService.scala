@@ -6,7 +6,7 @@ import com.mayo.planette.domain.WithId
  * @author yoav @since 6/22/16.
  */
 trait RecipesService {
-
+  type AuthenticationToken
   type Recipe <: RecipeMandatoryProperties with WithId[RecipeId]
   type RecipeId
   type RecipeCreator
@@ -19,8 +19,9 @@ trait RecipesService {
 
 
   type Operation[A,B]
+  type AuthenticatedOperation[A,B] = AuthenticationToken => Operation[A,B]
 
-  def createRecipe: Operation[CreateRecipeRequest, Recipe]
-  def updateRecipe: Operation[UpdateRecipeRequest, Recipe]
-  def deleteRecipe: Operation[RecipeId, OperationAcknowledgement]
+  def createRecipe: AuthenticatedOperation[CreateRecipeRequest, Recipe]
+  def updateRecipe: AuthenticatedOperation[UpdateRecipeRequest, Recipe]
+  def deleteRecipe: AuthenticatedOperation[RecipeId, OperationAcknowledgement]
 }

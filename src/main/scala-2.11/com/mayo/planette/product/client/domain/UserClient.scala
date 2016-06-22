@@ -9,7 +9,7 @@ Account with
 Planning with
 Discovery with 
 Lessons with 
-UserWishlists with
+UserWishlistsService with
 Recipes{
   def appStart: Unit
 

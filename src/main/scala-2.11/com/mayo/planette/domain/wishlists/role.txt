@@ -1,1 +1,2 @@
-plain wish-list CRUD
+intelligent wish-list CRUD with questioning and pin pointing to the requested plan type.
+The questioning means that planning service gets a clear and understandable request
