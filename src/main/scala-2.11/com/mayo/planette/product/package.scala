@@ -6,7 +6,7 @@ package com.mayo.planette
 package object product {
   trait ScriptMocker {
     case class Stam(s:String)
-    def mock[A]: Stam with A
+    def mock[A]: A //Stam with A
     def mockWithAspects2[A,B]: A with B
 
   }

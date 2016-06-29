@@ -6,8 +6,8 @@ import com.mayo.planette.domain.wishlists.service.WishlistsService
 /**
  * @author yoav @since 6/17/16.
  */
-trait UserWishlistsService extends WishlistsService {
+trait ClientWishlistsService extends WishlistsService {
 
-  def userFillQuestionaire: Operation[Unit, WishlistItemQuestionaire]
+  def userFillQuestionaire: Operation[Unit, listItemQuestionnaireService.wishListDSLImpl.AnsweredQuestionnaire]
 
 }

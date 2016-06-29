@@ -5,7 +5,9 @@ package fddd.book.chapter_four.monoids_and_foldables
  */
 trait Foldable[F[_]] {
   def foldl[A, B](as: F[A], z: B, f: (B, A) => B): B
-  def foldMap[A, B](as: F[A])(f: A => B)(implicit m: Monoid[B]): B = foldl(as, m.zero, (b: B, a: A) => m.op(b, f(a)))
+  def foldMap[A, B](as: F[A])(f: A => B)(implicit m: Monoid[B]): B = foldl(as, m.zero, (b: B, a: A) => {
+    m.op(b, f(a))
+  })
 }
 
 object Foldable {

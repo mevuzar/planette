@@ -11,7 +11,7 @@ import scalaz.Monad
 /**
  * @author yoav @since 6/17/16.
  */
-trait Account extends AccountsService{
+trait ClientAccountsService extends AccountsService{
 
   val serverConnection: ServerConnection
 }

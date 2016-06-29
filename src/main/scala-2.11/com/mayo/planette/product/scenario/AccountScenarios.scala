@@ -1,7 +1,7 @@
 package com.mayo.planette.product
 package scenario
 
-import com.mayo.planette.product.client.domain.{Account, UserWishlistsService}
+import com.mayo.planette.product.client.domain.{ClientAccountsService, ClientWishlistsService}
 
 import scala.util.{Success, Try}
 import ScriptServices._
@@ -11,8 +11,8 @@ import ScriptServices._
  */
 trait AccountScenarios extends ScriptMocker {
 
-  val clientAccount: ScriptAccount
-  val userWishlists: ScriptUserWishlistsService[clientAccount.AuthenticationToken]
+  val clientAccount: ScriptAccountService
+  val userWishlists: ScriptWishlistsService[clientAccount.AuthenticationToken]
 
   val mockSignUp = mockWithAspects2[clientAccount.SignUpRequest, userWishlists.AuthenticationToken]
   val signUpAndSignOut = for {

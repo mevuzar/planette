@@ -5,11 +5,11 @@ package domain
  * @author yoav @since 6/16/16.
  */
 trait UserClient extends 
-Account with
-Planning with
+ClientAccountsService with
+//ClientPlanningService with
 Discovery with 
 Lessons with 
-UserWishlistsService with
+ClientWishlistsService with
 Recipes{
   def appStart: Unit
 
