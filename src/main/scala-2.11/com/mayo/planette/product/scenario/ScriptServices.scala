@@ -3,7 +3,7 @@ package com.mayo.planette.product.scenario
 import com.mayo.planette.Monadic
 import com.mayo.planette.domain.WithId
 import com.mayo.planette.domain.wishlists.service.WishlistItemQuestionnaireService
-import com.mayo.planette.product.client.domain.{ClientAccountsService, ClientPlanningService, ClientWishlistsService}
+import com.mayo.planette.product.client.domain.{ClientRecipesService, ClientAccountsService, ClientPlanningService, ClientWishlistsService}
 
 import scala.util.Try
 
@@ -13,12 +13,12 @@ import scala.util.Try
 object ScriptServices {
 
   trait ScriptAccountService extends ClientAccountsService {
-    override type Operation[A, B] = A => Try[B]
+    //override type Operation[A, B] = A => Try[B]
   }
 
-  trait ScriptWishlistsService[AccountsToken] extends ClientWishlistsService {
-    override type AuthenticationToken = AccountsToken
-    override type Operation[A, B] = A => Try[B]
+  trait ScriptWishlistsService extends ClientWishlistsService {
+    //override type AuthenticationToken = AccountsToken
+    //override type Operation[A, B] = A => Try[B]
     override type WishlistCreate <: ScriptWishlistMandatoryProperties
     override type WishlistUpdate <: ScriptWishlistUpdateProperties with WithId[WishlistId]
 
@@ -34,22 +34,23 @@ object ScriptServices {
 
     override val listItemQuestionnaireService: ScriptWIQuestionnaireService
 
-    trait ScriptWIQuestionnaireService extends WishlistItemQuestionnaireService[AccountsToken] {
+    trait ScriptWIQuestionnaireService extends WishlistItemQuestionnaireService {
 
-      trait ScriptMonadic[A] extends Monadic[A, F]
+     // trait ScriptMonadic[A] extends Monadic[A, F]
 
-      override type F[A] = ScriptMonadic[A]
+     // override type F[A] = ScriptMonadic[A]
 
     }
 
   }
 
 
-  trait ScriptPlanningService[AccountToken, AnsweredQ] extends ClientPlanningService {
-    override type AnsweredQuestionnaire = AnsweredQ
-    override type AuthenticationToken = AccountToken
-    type CookingPlanningSession <: PlanningSession
+  trait ScriptPlanningService[WLItem] extends ClientPlanningService {
+    override type WishlistItem = WLItem
+    //override type AuthenticationToken = AccountToken
+
   }
 
 
+  trait ScriptRecipesService extends ClientRecipesService
 }

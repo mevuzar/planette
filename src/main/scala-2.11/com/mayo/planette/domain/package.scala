@@ -1,7 +1,6 @@
 package com.mayo.planette
 
 import scala.concurrent.Future
-import scala.xml.dtd.ContentModel._labelT
 
 /**
  * @author yoav @since 6/21/16.
@@ -9,7 +8,30 @@ import scala.xml.dtd.ContentModel._labelT
 package object domain {
   type ServerOperation[Request, Response] = Request => Future[Response]
 
-  trait WithId[Id]{
+  trait F[A] extends Monadic[A, F]
+
+  //  trait ServerOperations{
+  //
+  //    type Operation[A, B] = A => Monadic[B, F]
+  //    type AuthenticationToken
+  //    type AuthenticatedOperation[A, B] = AuthenticationToken => Operation[A, B]
+  //  }
+
+  object ServerOperations {
+    //extends ServerOperations {
+    type Operation[A, B] = A => Monadic[B, F]
+    type AuthenticatedOperation[A, B] = AuthenticationToken => Operation[A, B]
+    //override type F[A] = this.type
+    type AuthenticationToken = AnyRef
+  }
+
+  type Operation[A, B] = ServerOperations.Operation[A, B]
+  //type AuthenticationToken = ServerOperations.AuthenticationToken
+  type AuthenticatedOperation[A, B] = ServerOperations.AuthenticatedOperation[A, B]
+
+  //type F[A] = ServerOperations.F[A]
+
+  trait WithId[Id] {
     val id: Id
   }
 

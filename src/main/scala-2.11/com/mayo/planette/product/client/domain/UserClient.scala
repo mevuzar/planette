@@ -6,11 +6,11 @@ package domain
  */
 trait UserClient extends 
 ClientAccountsService with
-//ClientPlanningService with
+ClientPlanningService with
 Discovery with 
 Lessons with 
 ClientWishlistsService with
-Recipes{
+ClientRecipesService{
   def appStart: Unit
 
   def show[A](a: A): Unit

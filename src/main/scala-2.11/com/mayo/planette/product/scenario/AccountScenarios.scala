@@ -1,6 +1,7 @@
 package com.mayo.planette.product
 package scenario
 
+import com.mayo.planette.domain.ServerOperations
 import com.mayo.planette.product.client.domain.{ClientAccountsService, ClientWishlistsService}
 
 import scala.util.{Success, Try}
@@ -12,9 +13,9 @@ import ScriptServices._
 trait AccountScenarios extends ScriptMocker {
 
   val clientAccount: ScriptAccountService
-  val userWishlists: ScriptWishlistsService[clientAccount.AuthenticationToken]
+  val userWishlists: ScriptWishlistsService//[clientAccount.AuthenticationToken]
 
-  val mockSignUp = mockWithAspects2[clientAccount.SignUpRequest, userWishlists.AuthenticationToken]
+  val mockSignUp = mock[clientAccount.SignUpRequest]//WithAspects2[clientAccount.SignUpRequest, userWishlists.AuthenticationToken]
   val signUpAndSignOut = for {
     credentials <- clientAccount.signUp(mockSignUp)
     signOutResult <- clientAccount.signOut(credentials)
@@ -26,16 +27,16 @@ trait AccountScenarios extends ScriptMocker {
   } yield wishlist
 
 
-  signUpAndCreateWishlist match {
+  Try(signUpAndCreateWishlist.get) match {
     //TODO: use scalacheck here
     case Success(wishlist) => println("success")
     case _ => println("failure")
   }
 
-  signUpAndSignOut match {
+  Try(signUpAndSignOut.get) match {
     //TODO: use scalacheck here
     case Success((token, _)) => {
-      if (clientAccount.signOut(token).isFailure) println("success")
+      if (Try(clientAccount.signOut(token).get).isFailure) println("success")
       else println("failure")
     }
 

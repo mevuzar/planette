@@ -6,7 +6,7 @@ Planette uses whatis as the source for universal facts and then adds a good plan
 which most people don't have.
 
 Objective Constraints:
-Constraints that are hard/impossible to break/bypass(more than now and than if at all).
+Constraints that are hard/impossible to break/bypass(more than 'now and then' if at all).
 Could originate in you environment (working hours, spouse's working hours,
 kid pick-up hours, grocery store opening hours etc.)
 
@@ -71,6 +71,6 @@ A good way (both conceptually and commercially speaking) of doing that is throug
 communities where people vote for definitions, get points for voting and contributing,
 getting authoritative roles over domains under definition etc.
 Of course, planette should keep essential domains close to chest in order to keep
-these select few under total control.
+these select few under total control and at uncompromising accuracy assurance.
 
 ##########################################################################################

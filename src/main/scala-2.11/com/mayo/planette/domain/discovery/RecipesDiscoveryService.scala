@@ -1,4 +1,5 @@
-package com.mayo.planette.domain.discovery
+package com.mayo.planette.domain
+package discovery
 
 /**
  * @author yoav @since 6/22/16.
@@ -9,8 +10,6 @@ trait RecipesDiscoveryService {
   type Recipe
   type RecipeCategory
 
-  type Operation[A,B]
-  type AuthenticatedOperation[A,B] = AuthenticationToken => Operation[A,B]
 
   def searchByQuery:AuthenticatedOperation[SearchQuery,List[Recipe]]
 

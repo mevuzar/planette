@@ -1,16 +1,17 @@
-package com.mayo.planette.domain.wishlists.service
+package com.mayo.planette.domain
+package wishlists.service
 
-import com.mayo.planette.domain.WithId
+import com.mayo.planette.domain.{ServerOperations, WithId}
 
 /**
  * @author yoav @since 6/21/16.
  */
-trait WishlistsService {
+trait WishlistsService{
   type WishlistCreate <: WishlistMandatoryProperties
   type WishlistUpdate <: WishlistUpdateMandatoryProperties with WithId[WishlistId]
   type Wishlist <: WishlistMandatoryProperties with WithId[WishlistId]
   type WishlistId
-  type AuthenticationToken
+  //type AuthenticationToken
   type WishlistItem = listItemQuestionnaireService.wishListDSLImpl.AnsweredQuestionnaire
 
 
@@ -23,10 +24,10 @@ trait WishlistsService {
     val itemsToRemove: List[WishlistItem]
   }
 
-  type Operation[A, B]
-  type AuthenticatedOperation[A, B] = AuthenticationToken => Operation[A, B]
+//  type Operation[A, B]
+//  type AuthenticatedOperation[A, B] = AuthenticationToken => Operation[A, B]
 
-  val listItemQuestionnaireService: WishlistItemQuestionnaireService[AuthenticationToken]
+  val listItemQuestionnaireService: WishlistItemQuestionnaireService
 
   def createWishlist: AuthenticatedOperation[WishlistCreate, Wishlist]
 

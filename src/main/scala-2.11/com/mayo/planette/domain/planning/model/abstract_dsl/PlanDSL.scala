@@ -21,10 +21,11 @@ trait PlanDSL {
     val goalType: GoalType
   }
 
+
   type PlanQuestionnaire
-  type GoalQuestionnaire <: PlanQuestionnaire
-  type AssignmentQuestionnaire <: PlanQuestionnaire
-  type ActivityQuestionnaire <: PlanQuestionnaire
+  type PQGoalAspect
+  type PQAssignmentAspect
+  type ActivityQuestionnaire
 
 }
 

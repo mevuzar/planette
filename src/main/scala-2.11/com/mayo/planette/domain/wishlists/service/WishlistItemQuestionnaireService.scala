@@ -1,19 +1,21 @@
-package com.mayo.planette.domain.wishlists.service
+package com.mayo.planette.domain
+package wishlists.service
 
+import com.mayo.planette.domain.{ServerOperations, F}
 import com.mayo.planette.domain.wishlists.model.{PlanCategory, PlanType, WishlistDSL}
 import com.mayo.planette.{Applicable, Monadic}
 
 /**
  * @author yoav @since 6/22/16.
  */
-trait WishlistItemQuestionnaireService[AuthenticationToken] {
+trait WishlistItemQuestionnaireService { //[AuthenticationToken] {
 
   val wishListDSLImpl: WishlistDSL
 
   val applicable: Applicable[F]
-  type F[A] <: Monadic[A, F]
-  type Operation[A, B] = A => Monadic[B, F]
-  type AuthenticatedOperation[A, B] = AuthenticationToken => Operation[A, B]
+//  type F[A] <: Monadic[A, F]
+//  type Operation[A, B] = A => Monadic[B, F]
+//  type AuthenticatedOperation[A, B] = AuthenticationToken => Operation[A, B]
 
   def fillQuestionnaire: AuthenticatedOperation[wishListDSLImpl.Questionnaire, wishListDSLImpl.AnsweredQuestionnaire] = { token => { questionnaire =>
     val answer = for {

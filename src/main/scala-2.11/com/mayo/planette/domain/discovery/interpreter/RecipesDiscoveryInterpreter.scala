@@ -9,5 +9,4 @@ import model.RecipesDiscoveryModel
 trait RecipesDiscoveryInterpreter extends RecipesDiscoveryService{
   override type Recipe = RecipesDiscoveryModel.Recipe
   override type RecipeCategory = RecipesDiscoveryModel.RecipeCategory
-  override type Operation[A,B] = ServerOperation[A,B]
 }
