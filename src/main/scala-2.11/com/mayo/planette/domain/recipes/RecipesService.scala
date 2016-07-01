@@ -2,7 +2,7 @@ package com.mayo.planette.domain
 package recipes
 
 import com.mayo.planette.domain.planning.model.SerializationBridge
-import com.mayo.planette.domain.planning.model.abstract_dsl.PlanDSL
+import com.mayo.planette.domain.planning.model.abstract_dsl.{PlanMandatoryProperties, PlanDSL}
 import com.mayo.planette.domain.{ServerOperations, WithId}
 
 /**
@@ -15,14 +15,14 @@ trait RecipesService{
   type RecipeCreator
   type OperationAcknowledgement
   type CreateRecipeRequest <: RecipeMandatoryProperties
-  type UpdateRecipeRequest <: WithId[RecipeId]
+  type UpdateRecipeRequest <: RecipeMandatoryProperties with WithId[RecipeId]
   trait RecipeMandatoryProperties{
     val creator: RecipeCreator
-  }
-  val serializationBridgitte: SerializationBridge[PlanDSL#Plan, CreateRecipeRequest]
+    val plan: PlanMandatoryProperties
 
-//  type Operation[A,B]
-//  type AuthenticatedOperation[A,B] = AuthenticationToken => Operation[A,B]
+    def withPlan(id: RecipeId, planMandatoryProperties: PlanMandatoryProperties): Recipe
+  }
+  val serializationBridge: SerializationBridge[Serialized[_], CreateRecipeRequest]
 
   def createRecipe: AuthenticatedOperation[CreateRecipeRequest, Recipe]
   def updateRecipe: AuthenticatedOperation[UpdateRecipeRequest, Recipe]

@@ -6,7 +6,7 @@ import com.mayo.planette.domain.wishlists.model.{PlanType, PlanCategory}
  * @author yoav @since 6/22/16.
  */
 trait PlanDSL {
-  type Plan <: Periodic
+  type Plan <: PlanMandatoryProperties
   type Goal <: Plan with GoalMandatoryProperties
   type Activity <: Plan
   type Assignment <: Plan
@@ -28,6 +28,8 @@ trait PlanDSL {
   type ActivityQuestionnaire
 
 }
+
+trait PlanMandatoryProperties extends Periodic
 
 trait Periodic{
   val isPeriodic: Boolean

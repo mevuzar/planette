@@ -31,7 +31,7 @@ trait PlanningService{
   type PlanCategory
   //type AuthenticationToken
 
-  val serializationBridge: SerializationBridge[WishlistItem, planDSL.PlanQuestionnaire]
+  val serializationBridge: SerializationBridge[Serialized[_], planDSL.PlanQuestionnaire]
   val planDSL: PlanDSL
 
   val applicable: Applicable[F]

@@ -52,5 +52,7 @@ object ScriptServices {
   }
 
 
-  trait ScriptRecipesService extends ClientRecipesService
+  trait ScriptRecipesService extends ClientRecipesService{
+    def generateUpdateRequestFromRecipe(recipe: RecipeMandatoryProperties): UpdateRecipeRequest
+  }
 }

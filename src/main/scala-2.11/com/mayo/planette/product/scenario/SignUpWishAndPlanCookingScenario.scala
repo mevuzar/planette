@@ -2,6 +2,7 @@ package com.mayo.planette.product.scenario
 
 import java.time.ZonedDateTime
 
+import com.mayo.planette.domain.Serialized
 import com.mayo.planette.domain.wishlists.model.{Cooking, PlanCategory, WishlistDSL}
 import com.mayo.planette.product.ScriptMocker
 
@@ -30,7 +31,8 @@ trait SignUpWishAndPlanCookingScenario extends ScriptMocker{
 
     Try(signUpAndMakeAWish.get) match {
       case Success((token, wl)) =>
-        val planWishlistItem = planningService.serializationBridge.toB(wl.items.head)
+        val serializableWishlistItem = Serialized(wl.items.head)
+        val planWishlistItem = planningService.serializationBridge.toB(serializableWishlistItem)
         val plan = for {
           session <- planningService.plan(token)(wl.items.head)
           fPlan <- session

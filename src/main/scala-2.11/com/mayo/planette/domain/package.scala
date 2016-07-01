@@ -29,7 +29,11 @@ package object domain {
   //type AuthenticationToken = ServerOperations.AuthenticationToken
   type AuthenticatedOperation[A, B] = ServerOperations.AuthenticatedOperation[A, B]
 
-  //type F[A] = ServerOperations.F[A]
+  trait Serialized[A]
+
+  object Serialized {
+    def apply[A](a: A): Serialized[A] = ???  //TODO: implement sreialization usin typeclass pattern
+  }
 
   trait WithId[Id] {
     val id: Id
