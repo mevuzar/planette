@@ -38,7 +38,6 @@ trait SignUpWishAndPlanCookingScenario extends ScriptMocker{
           fPlan <- session
         } yield fPlan
 
-        //val plan = ff.map(_.get)
         println(s"success! plan: $plan")
         Success((token, plan))
 
