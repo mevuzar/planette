@@ -7,7 +7,7 @@ package domain
 trait UserClient {
   val accountService: ClientAccountsService
   val planningService: ClientPlanningService
-  val discoveryService: Discovery
+  val discoveryService: ClientRecipesDiscoveryService
   val lessonsService: Lessons
   val wishlistsService: ClientWishlistsService
   val recipesService: ClientRecipesService

@@ -2,7 +2,9 @@ package com.mayo.planette.product.scenario
 
 import com.mayo.planette.Applicable
 import com.mayo.planette.domain.ServerOperations.AuthenticationToken
+import com.mayo.planette.domain.discovery.model.RecipesDiscoveryModel.Cooking
 import com.mayo.planette.domain.planning.model.abstract_dsl.PlanMandatoryProperties
+import com.mayo.planette.domain.wishlists.model.PlanCategory
 import com.mayo.planette.domain.{F, Serialized}
 
 import scala.util.{Failure, Success, Try}
@@ -26,17 +28,19 @@ trait RecipeScenario extends SignUpWishAndPlanCookingScenario {
     }
   }
 
-  def updateRecipe = {
+  def updateRecipe(planCategory: PlanCategory) = {
     val tryCreatedRecipe = createPlanAndSaveRecipe
     tryCreatedRecipe match {
       case Success((token, recipe)) =>
 
         val updatedPlan = recipesService.generateUpdateRequestFromRecipe(recipe.withPlan(recipe.id, new PlanMandatoryProperties {
           override val isPeriodic: Boolean = true
+          override type Category = PlanCategory
+          override val planCategory: Category = planCategory
         }))
 
         val result = recipesService.updateRecipe(token)(updatedPlan)
-        Try(result.get)
+        Try((token, result.get))
 
       case _ => Failure(new Exception("failure"))
     }

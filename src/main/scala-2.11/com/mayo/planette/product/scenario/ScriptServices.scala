@@ -1,9 +1,9 @@
 package com.mayo.planette.product.scenario
 
 import com.mayo.planette.Monadic
-import com.mayo.planette.domain.WithId
+import com.mayo.planette.domain.{Serialized, WithId}
 import com.mayo.planette.domain.wishlists.service.WishlistItemQuestionnaireService
-import com.mayo.planette.product.client.domain.{ClientRecipesService, ClientAccountsService, ClientPlanningService, ClientWishlistsService}
+import com.mayo.planette.product.client.domain.{ClientRecipesDiscoveryService, ClientRecipesService, ClientAccountsService, ClientPlanningService, ClientWishlistsService}
 
 import scala.util.Try
 
@@ -54,5 +54,11 @@ object ScriptServices {
 
   trait ScriptRecipesService extends ClientRecipesService{
     def generateUpdateRequestFromRecipe(recipe: RecipeMandatoryProperties): UpdateRecipeRequest
+  }
+
+  trait ScriptRecipesDiscoveryService[TRecipe] extends ClientRecipesDiscoveryService{
+    override type Recipe = TRecipe
+    override type RecipeCategory
+    override type SearchQuery = TRecipe => Boolean
   }
 }
