@@ -2,9 +2,6 @@ package fddd.book.chapter_six.ex_6_1
 
 import java.util.{Calendar, Date}
 
-import scala.util.Try
-import scalaz.EitherT
-
 trait OrderModel {
   this: RefModel =>
 

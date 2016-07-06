@@ -3,9 +3,10 @@ package chapter_three
 
 import java.util.Date
 
-import scala.util.{Success, Try}
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Arbitrary, Gen, Properties}
+
+import scala.util.{Success, Try}
 
 /**
  * @author yoav @since 5/16/16.

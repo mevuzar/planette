@@ -1,9 +1,8 @@
 package fddd.book.chapter_six
 
 import scala.util.{Success, Try}
-import scalaz.{EitherT, NonEmptyList, \/}
-import scalaz._
-import Scalaz._
+import scalaz.Scalaz._
+import scalaz.{EitherT, \/, _}
 
 /**
  * @author yoav @since 6/7/16.

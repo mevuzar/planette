@@ -1,9 +1,6 @@
 package fddd.book.chapter_six.streams
 
-import java.util.{ Date, Calendar }
-import util.{ Try, Success, Failure }
-import scalaz._
-import Scalaz._
+import java.util.{Calendar, Date}
 
 object common {
   type Amount = BigDecimal
@@ -11,7 +8,7 @@ object common {
   def today = Calendar.getInstance.getTime
 }
 
-import common._
+import fddd.book.chapter_six.streams.common._
 
 case class Balance(amount: Amount = 0)
 

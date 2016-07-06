@@ -1,10 +1,10 @@
 package fddd.book.chapter_six
 
-import java.util.{Date, Calendar}
+import java.util.{Calendar, Date}
 
-import scala.util.{Failure, Success, Try}
+import scala.util.Try
+import scalaz.Scalaz._
 import scalaz._
-import Scalaz._
 import scalaz.concurrent.Task
 
 /**

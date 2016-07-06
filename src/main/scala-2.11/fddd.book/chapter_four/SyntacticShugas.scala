@@ -1,7 +1,7 @@
 package fddd.book.chapter_four
 
 import fddd.book.chapter_four.functors_and_applicatives.Functor
-import fddd.book.chapter_four.monoids_and_foldables.{Monoid, Foldable}
+import fddd.book.chapter_four.monoids_and_foldables.{Foldable, Monoid}
 
 /**
  * @author yoav @since 5/31/16.

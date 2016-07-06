@@ -1,10 +1,7 @@
 package fddd.book
 package chapter_two
 
-import java.time.{ZonedDateTime, Duration}
-
-
-
+import java.time.{Duration, ZonedDateTime}
 
 import scala.util.{Success, Try}
 

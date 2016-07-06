@@ -2,14 +2,12 @@ package fddd.book.chapter_six.streams
 
 import akka.NotUsed
 import akka.actor.ActorSystem
-import akka.stream.{ActorMaterializer, ClosedShape}
+import akka.stream.ActorMaterializer
 import akka.stream.scaladsl._
-import scala.collection.immutable.Seq
-import scala.concurrent.Future
-import OnlineService._
-import Transaction.TransactionMonoid
-import scalaz.{ Source => Sourcez, Sink => Sinkz, _ }
-import Scalaz._
+import fddd.book.chapter_six.streams.OnlineService._
+import fddd.book.chapter_six.streams.Transaction.TransactionMonoid
+
+import scalaz.{Sink => Sinkz, Source => Sourcez}
 /**
  * Created by Owner on 6/13/2016.
  */

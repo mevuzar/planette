@@ -1,15 +1,13 @@
 package fddd.book.chapter_six.streams
 
 import java.util.Date
-import scala.concurrent.duration._
-import scala.concurrent.{Future, ExecutionContext}
-import scala.concurrent.ExecutionContext.Implicits.global
+
+import fddd.book.chapter_six.streams.common._
+
 import scala.collection.immutable._
-
+import scala.concurrent.{ExecutionContext, Future}
+import scalaz.Scalaz._
 import scalaz._
-import Scalaz._
-
-import common._
 
 sealed trait TransactionType
 

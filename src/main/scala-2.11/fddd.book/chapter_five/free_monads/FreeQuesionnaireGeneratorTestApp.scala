@@ -1,6 +1,6 @@
 package fddd.book.chapter_five.free_monads
 
-import com.mayo.planette.domain.wishlists.model.{Cooking, PlanTypeGoal}
+import com.mayo.planette.first_try.domain.wishlists.model.{Cooking, PlanTypeGoal}
 
 /**
  * @author yoav @since 6/26/16.

@@ -1,10 +1,10 @@
 package fddd.book.chapter_six.ex_6_2
 
 import java.util.Date
-import scala.collection.mutable.{ Map => MMap }
+
+import scala.collection.mutable.{Map => MMap}
+import scalaz.Scalaz._
 import scalaz._
-import Scalaz._
-import \/._
 
 trait AccountRepositoryInMemory extends AccountRepository {
   lazy val repo = MMap.empty[String, Account]

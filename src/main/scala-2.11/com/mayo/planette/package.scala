@@ -15,7 +15,7 @@ package object planette {
     }
   }
 
-  trait Applicable[T[A] <: Monadic[_, T]] extends Tryable[T]{
+  trait Applicable[T[A] <: Monadicon[A]] /*extends Tryable[T]*/{
     def apply[A](r: => A): T[A]
   }
 
@@ -30,4 +30,17 @@ package object planette {
     def flatMap[U](f: A => F[U]): F[U]
   }
 
+  trait Monadicon[A]{
+    type F[A]
+
+    def get: A
+    def map[U](f: A => U): F[U]
+    def flatMap[U](f: A => F[U]): F[U]
+  }
+
+  trait Mono[A]{
+    def get: A
+    def map[U](f: A => U): Mono[U]
+    def flatMap[U](f: A => Mono[U]): Mono[U]
+  }
 }

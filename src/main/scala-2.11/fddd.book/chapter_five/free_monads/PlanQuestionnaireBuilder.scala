@@ -1,6 +1,6 @@
 package fddd.book.chapter_five.free_monads
 
-import com.mayo.planette.domain.wishlists.model.{PlanCategory, PlanType}
+import com.mayo.planette.first_try.domain.wishlists.model.{PlanCategory, PlanType}
 
 import scalaz.Free._
 import scalaz.Functor
