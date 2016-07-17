@@ -100,32 +100,6 @@ trait AccountRepositoryImpl{
   def run[A](free:Free[Requestable,A], interpreter: Request ~> Id.Id): A =
       Free.runFC(free)(interpreter)
 }
-//trait ServiceOrchestrationImpl{
-//  import AccountRepository.{AccountTerms, Request}
-//  import AccountTerms._
-//  import Request._
-//
-//  val theId: UserId = 1
-//
-//  def getUser(id: UserId): Free[Requestable, User] =
-//    for {
-//      name  <- fetch(GetUserName(id))
-//      photo <- fetch(GetUserPhoto(id))
-//    } yield User(id, name, photo)
-//
-//  val free: Free[Requestable, List[(String, User)]] =
-//    for {
-//      tweets <- fetch(GetTweets(theId))
-//      result <- (tweets map { tweet: Tweet =>
-//        for {
-//          user <- getUser(tweet.userId)
-//        } yield (tweet.msg -> user)
-//      }).sequenceU
-//    } yield result
-//
-//  def run(interpreter: Request ~> Id.Id): List[(String, User)] =
-//    Free.runFC(free)(interpreter)
-//}
 
 object NoelsRepositoryFreeMonad extends AccountRepositoryImpl with App{
   import AccountRepository.{AccountTerms, Request}

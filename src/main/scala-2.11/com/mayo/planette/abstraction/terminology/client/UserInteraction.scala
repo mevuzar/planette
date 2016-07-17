@@ -14,10 +14,9 @@ package client
 
 private[abstraction] trait UserInteraction extends CommonOperations {
 
-  type QuestionType
+  type Questions
 
-  case class Question(question: QuestionType)
-
-  def getInfo[Info]: Operation[Question, Info]
+  def getInfo[Info]: Operation[Questions, Info]
 
 }
+
