@@ -17,6 +17,9 @@ Abstraction Layers:
 
     c. This is the layer where data types are denoted in.
 
+    All terminology gets implemented in production (no dangling code allowed) but some of the production layer's
+    modules (where abstraction doesn't contribute anything - such as free monads driven modules) exist only in production.
+
 Contracts and Injection:
     * Components which engender side effects(database, web calls etc.) should be deferred to
      surface level(closest to execution) as much as possible.

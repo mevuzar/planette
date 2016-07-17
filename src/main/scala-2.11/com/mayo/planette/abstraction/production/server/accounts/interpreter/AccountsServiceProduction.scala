@@ -17,14 +17,17 @@ import scalaz.{Free, Id, ~>}
  * @author yoav @since 7/6/16.
  */
 trait AccountsServiceProduction extends AccountsService {
+
   override type Operation[A, B] = A => Future[B]
+
+  override type AuthenticationToken = UserToken
   override type Credentials = AccountCredentials
   override type SignUpRequest = UserSignupDetails
   override type AccountId = UUID
   override type SignOutRequest = AccountId
   override type SignInRequest = (UUID, AccountCredentials)
-  override type AuthenticationToken = UserToken
   override type Account = UserAccount
+
 
 
   val dbDriver: (DataStoreRequest ~> Id.Id)

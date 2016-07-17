@@ -2,15 +2,15 @@ package com.mayo.planette.business_scripts
 
 import akka.actor.ActorSystem
 import com.mayo.planette.abstraction.production.client.{AccountsUserInteractions, ClientAccountsProductionService}
-import com.mayo.planette.abstraction.production.common.UserInteractionProductionInterpreter
+import com.mayo.planette.abstraction.production.common.accounts.model.AccountModel.UserToken
 import com.mayo.planette.abstraction.production.server.accounts.interpreter.AccountsServiceProduction
 import com.mayo.planette.abstraction.terminology.DataDSL.DataStoreRequest
 import com.mayo.planette.abstraction.terminology.ServiceDSL.ServiceOperation
-import com.mayo.planette.business_scripts.interpreters.{StdInInteractionInterpreter, AccountsRepositoryInMemInterpreter, DirectServerCommunication}
-import com.mayo.planette.abstraction.terminology.client.Interaction
+import com.mayo.planette.business_scripts.interpreters.{AccountsRepositoryInMemInterpreter, DirectServerCommunication, StdInInteractionInterpreter}
 
+import scala.collection.mutable.HashMap
 import scala.concurrent.ExecutionContext
-import scalaz.{Free, Id, ~>}
+import scalaz.{Id, ~>}
 
 /**
  * @author yoav @since 7/6/16.
@@ -24,7 +24,7 @@ object SignUpScript extends App {
     override implicit val ctxt: ExecutionContext = system.dispatcher
   }
 
-  val userInteraction: AccountsUserInteractions = new AccountsUserInteractions{}
+  val userInteraction: AccountsUserInteractions = new AccountsUserInteractions {}
 
 
   val userAccounts: ClientAccountsProductionService = new ClientAccountsProductionService {
@@ -32,11 +32,15 @@ object SignUpScript extends App {
     override implicit val ctxt: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
     override val interpreter: ~>[ServiceOperation, Id.Id] = new DirectServerCommunication(accountService)
 
-    override def serialize[A, B]: (A) => B = ???
+    override def localToken: Option[UserToken] = dataStore.get("auth_token").map(t => t.asInstanceOf[UserToken])
 
-    override def deserialize[A, B]: (A) => B = ???
+    override def storeLocalData[Data](name: String, data: Data) = {
+      dataStore.put(name, data)
+      dataStore
+    }
 
-
+    override type LocalDataStore = HashMap[String, Any]
+    override val dataStore: LocalDataStore = HashMap.empty[String, Any]
   }
 
   //val details = userInteraction.askSignUpDetails(StdInInteractionInterpreter)
