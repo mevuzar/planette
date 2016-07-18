@@ -2,7 +2,8 @@ package com.mayo.planette.business_scripts.interpreters
 
 import java.util.UUID
 
-import com.mayo.planette.abstraction.production.common.accounts.model.AccountModel._
+import com.mayo.planette.abstraction.production.common.model.AccountModel
+import AccountModel._
 import com.mayo.planette.abstraction.production.server.accounts.dal.AccountRepositoryF.DSL._
 import com.mayo.planette.abstraction.terminology.DataDSL.{DataOpteration, DataStoreRequest}
 

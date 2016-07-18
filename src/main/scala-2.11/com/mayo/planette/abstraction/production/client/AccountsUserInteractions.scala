@@ -1,6 +1,7 @@
 package com.mayo.planette.abstraction.production.client
 
-import com.mayo.planette.abstraction.production.common.accounts.model.AccountModel.{UserSignupDetails, AccountCredentials, UserAccount, UserToken}
+import com.mayo.planette.abstraction.production.common.model.AccountModel
+import AccountModel.{UserSignupDetails, AccountCredentials, UserAccount, UserToken}
 import com.mayo.planette.abstraction.terminology.client.{Question, UserInteractions, PreDefInteractions}
 import UserInteractions._
 import PreDefInteractions._

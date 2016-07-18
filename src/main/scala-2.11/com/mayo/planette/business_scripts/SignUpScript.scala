@@ -2,7 +2,8 @@ package com.mayo.planette.business_scripts
 
 import akka.actor.ActorSystem
 import com.mayo.planette.abstraction.production.client.{AccountsUserInteractions, ClientAccountsProductionService}
-import com.mayo.planette.abstraction.production.common.accounts.model.AccountModel.UserToken
+import com.mayo.planette.abstraction.production.common.model.AccountModel
+import AccountModel.UserToken
 import com.mayo.planette.abstraction.production.server.accounts.interpreter.AccountsServiceProduction
 import com.mayo.planette.abstraction.terminology.DataDSL.DataStoreRequest
 import com.mayo.planette.abstraction.terminology.ServiceDSL.ServiceOperation

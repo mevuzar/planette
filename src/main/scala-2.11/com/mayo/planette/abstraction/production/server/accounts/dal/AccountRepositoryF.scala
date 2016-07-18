@@ -1,6 +1,7 @@
 package com.mayo.planette.abstraction.production.server.accounts.dal
 
-import com.mayo.planette.abstraction.production.common.accounts.model.AccountModel._
+import com.mayo.planette.abstraction.production.common.model.AccountModel
+import AccountModel._
 import com.mayo.planette.abstraction.production.server.accounts.dal.interpreters.AccountsRepositoryLoggerInterpreter
 import com.mayo.planette.abstraction.terminology.DataDSL.{DataCall, DataOperations}
 import com.mayo.planette.abstraction.terminology.StringOr

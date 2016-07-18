@@ -1,6 +1,7 @@
 package com.mayo.planette.business_scripts.tech_samples
 
-import com.mayo.planette.abstraction.production.common.accounts.model.AccountModel.{AccountCredentials, UserAccount}
+import com.mayo.planette.abstraction.production.common.model.AccountModel
+import AccountModel.{AccountCredentials, UserAccount}
 import com.mayo.planette.abstraction.production.server.accounts.dal.interpreters.AccountsRepositoryLoggerInterpreter
 import com.mayo.planette.business_scripts.interpreters.AccountsRepositoryInMemInterpreter
 import com.mayo.planette.abstraction.production.server.accounts.dal.AccountRepositoryF.AccountDataOperations._

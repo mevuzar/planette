@@ -3,7 +3,8 @@ package com.mayo.planette.abstraction.production.server.accounts.interpreter
 
 import java.util.UUID
 
-import com.mayo.planette.abstraction.production.common.accounts.model.AccountModel._
+import com.mayo.planette.abstraction.production.common.model.AccountModel
+import AccountModel._
 import com.mayo.planette.abstraction.production.server.accounts.dal.AccountRepositoryF.AccountDataOperations._
 import com.mayo.planette.abstraction.terminology.DataDSL._
 import com.mayo.planette.abstraction.terminology.common.AccountsService

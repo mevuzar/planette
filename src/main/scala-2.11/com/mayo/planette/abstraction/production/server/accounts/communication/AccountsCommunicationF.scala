@@ -2,7 +2,8 @@ package com.mayo.planette.abstraction.production.server.accounts.communication
 
 import java.util.UUID
 
-import com.mayo.planette.abstraction.production.common.accounts.model.AccountModel.{AccountCredentials, UserSignupDetails, UserToken}
+import com.mayo.planette.abstraction.production.common.model.AccountModel
+import AccountModel.{AccountCredentials, UserSignupDetails, UserToken}
 import com.mayo.planette.abstraction.terminology.FutureStringOr
 import com.mayo.planette.abstraction.terminology.ServiceDSL.ServiceMethodCall
 import com.mayo.planette.abstraction.terminology.ServiceDSL.ServiceOperations._

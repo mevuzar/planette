@@ -1,7 +1,8 @@
-package com.mayo.planette.abstraction.production.common.accounts.model
+package com.mayo.planette.abstraction.production.common.model
+
+import java.util.UUID
 
 import scala.util.{Failure, Success, Try}
-import java.util.UUID
 
 /**
  * @author yoav @since 7/6/16.

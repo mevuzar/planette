@@ -3,7 +3,8 @@ package client
 
 import java.util.UUID
 
-import com.mayo.planette.abstraction.production.common.accounts.model.AccountModel.{AccountCredentials, UserAccount, UserSignupDetails, UserToken}
+import com.mayo.planette.abstraction.production.common.model.AccountModel
+import AccountModel.{AccountCredentials, UserAccount, UserSignupDetails, UserToken}
 import com.mayo.planette.abstraction.production.server.accounts.communication.AccountsCommunicationF.AccountsCommunicationOperations
 import com.mayo.planette.abstraction.terminology.ServiceDSL.ServiceOperation
 import com.mayo.planette.abstraction.terminology.client.ClientAccountService
