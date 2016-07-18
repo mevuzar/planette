@@ -29,13 +29,11 @@ trait AccountsServiceProduction extends AccountsService {
   override type SignInRequest = (UUID, AccountCredentials)
   override type Account = UserAccount
 
-
-
   val dbDriver: (DataStoreRequest ~> Id.Id)
 
   implicit val ctxt: ExecutionContext
 
-  override def signUp: (SignUpRequest) => Future[AuthenticationToken] = {
+  override def signUp: (SignUpRequest) => Future[Try[AuthenticationToken]] = {
 
     request =>
       val future = Future {
@@ -46,12 +44,13 @@ trait AccountsServiceProduction extends AccountsService {
           stored <- storeAccount(account)
         } yield stored
 
-        val result = operation match {
-          case Success(account) => UserToken(account.id, account.token)
-          case _ => throw new Exception("failed to store account") //TODO: make concrete exception
-        }
-
-        result
+//        val result = operation match {
+//          case Success(account) => UserToken(account.id, account.token)
+//          case _ => throw new Exception("failed to store account") //TODO: make concrete exception
+//        }
+//
+//        result
+        operation.map(account => UserToken(account.id, account.token))
       }
 
       future

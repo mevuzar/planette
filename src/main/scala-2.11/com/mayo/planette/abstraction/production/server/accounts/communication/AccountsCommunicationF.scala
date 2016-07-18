@@ -17,7 +17,7 @@ object AccountsCommunicationF {
 
   sealed trait AccountsMethodCall[+A] extends ServiceMethodCall[A]
 
-  case class SignUpCall(signUpDetails: UserSignupDetails) extends AccountsMethodCall[FutureStringOr[UserToken]]
+  case class SignUpCall(signUpDetails: UserSignupDetails) extends AccountsMethodCall[FutureStringOr[Try[UserToken]]]
 
   case class SignInCall(signInDetails: (UUID, AccountCredentials)) extends AccountsMethodCall[FutureStringOr[Try[UserToken]]]
 

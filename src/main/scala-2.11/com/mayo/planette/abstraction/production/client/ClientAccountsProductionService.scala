@@ -35,7 +35,7 @@ trait ClientAccountsProductionService extends ClientAccountService {
   override type AuthenticationToken = UserToken
 
 
-  override def signUp: (SignUpRequest) => Future[AuthenticationToken] = { request => {
+  override def signUp: (SignUpRequest) => Future[Try[AuthenticationToken]] = { request => {
     val script = AccountsCommunicationOperations.signUp(request)
     val result = Free.runFC(script)(interpreter).right.get
     result onSuccess {

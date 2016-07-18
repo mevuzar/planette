@@ -1,13 +1,8 @@
 package com.mayo.planette.abstraction.production.server.accounts.dal
 
-import com.mayo.planette.abstraction.production.common.model.AccountModel
-import AccountModel._
-import com.mayo.planette.abstraction.production.server.accounts.dal.interpreters.AccountsRepositoryLoggerInterpreter
+import com.mayo.planette.abstraction.production.common.model.AccountModel._
 import com.mayo.planette.abstraction.terminology.DataDSL.{DataCall, DataOperations}
 import com.mayo.planette.abstraction.terminology.StringOr
-import com.mayo.planette.business_scripts.interpreters.AccountsRepositoryInMemInterpreter
-
-import scalaz.Free
 
 /**
  * @author yoav @since 7/11/16.
@@ -27,7 +22,9 @@ object AccountRepositoryF {
   object DSL {
 
     type FreeCall[A] = Free[DataCall, A]
+
     sealed trait AccountDataCall[+A] extends DataCall[A]
+
     final case class AccountQuery(userId: UUID) extends AccountDataCall[StringOr[Try[UserAccount]]]
 
     final case class StoreAccount(account: UserAccount) extends AccountDataCall[StringOr[Try[Unit]]]
@@ -36,9 +33,10 @@ object AccountRepositoryF {
 
   }
 
-  object AccountDataOperations extends DataOperations{
+  object AccountDataOperations extends DataOperations {
+
     import DSL._
-    
+
     def query(id: UUID) = dataOperation(AccountQuery(id))
 
     def store[A](userAccount: UserAccount) = dataOperation(StoreAccount(userAccount))
@@ -46,6 +44,7 @@ object AccountRepositoryF {
     def delete[A](id: UUID) = dataOperation(DeleteAccount(id))
 
   }
+
 }
 
 

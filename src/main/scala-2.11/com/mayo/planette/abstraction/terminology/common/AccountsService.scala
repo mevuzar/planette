@@ -28,7 +28,7 @@ private[abstraction] trait AccountsService extends CommonOperations with CommonT
 //  def setAccountCredentials: Credentials => Account => Account
 //  def signOutRequestToAccountId: SignOutRequest => AccountId
 
-  def signUp: Operation[SignUpRequest, AuthenticationToken]
+  def signUp: Operation[SignUpRequest, Try[AuthenticationToken]]
 
   def signIn: Operation[SignInRequest, Try[AuthenticationToken]]
 
