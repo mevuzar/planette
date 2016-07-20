@@ -15,11 +15,9 @@ private[abstraction] trait WishlistsService extends CommonOperations with Authen
   type WishlistId
   type WishlistItem
 
-  val listItemQuestionnaireService: WishlistItemQuestionnaireService
-
   def createWishlist: AuthenticatedOperation[WishlistCreate, Try[Wishlist]]
 
-  def deleteWishlist: AuthenticatedOperation[WishlistId, Boolean]
+  def deleteWishlist: AuthenticatedOperation[WishlistId, Try[Unit]]
 
   def updateWishlist: AuthenticatedOperation[WishlistUpdate, Try[Wishlist]]
 }

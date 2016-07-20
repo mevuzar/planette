@@ -4,7 +4,10 @@ import java.time.{ZoneId, ZonedDateTime}
 
 import com.mayo.planette.abstraction.terminology.client.{Interact, Question, PreDefInteractions}
 import PreDefInteractions._
+import com.sun.javaws.exceptions.InvalidArgumentException
+import scala.annotation.tailrec
 import scala.io.StdIn._
+import scala.util.{Success, Failure}
 import scalaz.{Id, ~>}
 
 /**
@@ -36,6 +39,34 @@ object StdInInteractionInterpreter extends (Question ~> Id.Id){
           readDouble
 
         case UUIDInteraction(q) => java.util.UUID.fromString(readLine(q + "\n"))
+
+        case BooleanInteraction(q) =>
+          @tailrec
+          def getAnswer: Boolean ={
+            val reply = readLine(q + "\n")
+            if (Seq("true", "yes", "y", "yeah", "yap").contains(reply.toLowerCase)) true
+            else if (Seq("false", "no", "n", "nah", "nope").contains(reply.toLowerCase)) false
+            else {
+              println(s"you gave an illegal answer $reply to the Boolean question: $q..." +
+              s"\ntry again(possible answers are:[true, yes, y, yeah, yap]/[false, no, n, nah, nope])")
+            getAnswer
+            }
+          }
+
+          getAnswer
+
+        case StringBasedTransformation(q, f) =>
+          @tailrec
+          def getAnswer: A = {
+            val reply = readLine(q)
+            f(reply) match {
+              case Success(a) => a
+              case Failure(e) =>
+                println(s"There was a problem transforming $reply to ${f.getClass.getTypeParameters()}")
+                getAnswer
+            }
+        }
+          getAnswer
       }
 
 

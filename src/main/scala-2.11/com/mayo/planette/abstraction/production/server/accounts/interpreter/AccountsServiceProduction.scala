@@ -33,7 +33,7 @@ trait AccountsServiceProduction extends AccountsService {
 
   implicit val ctxt: ExecutionContext
 
-  override def signUp: (SignUpRequest) => Future[Try[AuthenticationToken]] = {
+  override def signUp: (SignUpRequest) => Future[Try[Account]] = {
 
     request =>
       val future = Future {
@@ -50,7 +50,7 @@ trait AccountsServiceProduction extends AccountsService {
 //        }
 //
 //        result
-        operation.map(account => UserToken(account.id, account.token))
+        operation//.map(account => UserToken(account.id, account.token))
       }
 
       future

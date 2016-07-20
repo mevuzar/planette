@@ -2,6 +2,7 @@ package com.mayo.planette.abstraction.terminology
 
 import java.time.ZonedDateTime
 
+import scala.util.Try
 import scalaz.{Coyoneda, Free}
 
 /**
@@ -27,10 +28,12 @@ package object client {
 
   object PreDefInteractions{
     case class StringInteraction(question: String) extends Interaction[String]
+    case class BooleanInteraction(question: String) extends Interaction[Boolean]
     case class IntInteraction(question: String) extends Interaction[Int]
     case class DoubleInteraction(question: String) extends Interaction[Double]
     case class DateInteraction(question: String) extends Interaction[ZonedDateTime]
     case class UUIDInteraction(question: String) extends Interaction[java.util.UUID]
+    case class StringBasedTransformation[A](question: String, f: String => Try[A]) extends Interaction[A]
   }
 
 }

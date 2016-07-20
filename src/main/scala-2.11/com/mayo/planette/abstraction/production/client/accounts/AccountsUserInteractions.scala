@@ -1,10 +1,11 @@
-package com.mayo.planette.abstraction.production.client
+package com.mayo.planette.abstraction.production.client.accounts
 
 import com.mayo.planette.abstraction.production.common.model.AccountModel
-import AccountModel.{UserSignupDetails, AccountCredentials, UserAccount, UserToken}
-import com.mayo.planette.abstraction.terminology.client.{Question, UserInteractions, PreDefInteractions}
-import UserInteractions._
-import PreDefInteractions._
+import com.mayo.planette.abstraction.production.common.model.AccountModel.{AccountCredentials, UserSignupDetails}
+import com.mayo.planette.abstraction.terminology.client.PreDefInteractions._
+import com.mayo.planette.abstraction.terminology.client.UserInteractions._
+import com.mayo.planette.abstraction.terminology.client.{PreDefInteractions, Question, UserInteractions}
+
 import scalaz.{Free, Id, ~>}
 
 /**

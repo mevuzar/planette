@@ -1,10 +1,8 @@
-package com.mayo.planette.abstraction.production
-package client
+package com.mayo.planette.abstraction.production.client.accounts.interpreter
 
 import java.util.UUID
 
-import com.mayo.planette.abstraction.production.common.model.AccountModel
-import AccountModel.{AccountCredentials, UserAccount, UserSignupDetails, UserToken}
+import com.mayo.planette.abstraction.production.common.model.AccountModel.{AccountCredentials, UserAccount, UserSignupDetails, UserToken}
 import com.mayo.planette.abstraction.production.server.accounts.communication.AccountsCommunicationF.AccountsCommunicationOperations
 import com.mayo.planette.abstraction.terminology.ServiceDSL.ServiceOperation
 import com.mayo.planette.abstraction.terminology.client.ClientAccountService
@@ -35,11 +33,11 @@ trait ClientAccountsProductionService extends ClientAccountService {
   override type AuthenticationToken = UserToken
 
 
-  override def signUp: (SignUpRequest) => Future[Try[AuthenticationToken]] = { request => {
+  override def signUp: (SignUpRequest) => Future[Try[Account]] = { request => {
     val script = AccountsCommunicationOperations.signUp(request)
     val result = Free.runFC(script)(interpreter).right.get
     result onSuccess {
-      case token => storeLocalData("auth_token", token)
+      case accountTry => accountTry.map(dataStore.storeAccount)
       case _ =>
     }
     result
@@ -50,7 +48,7 @@ trait ClientAccountsProductionService extends ClientAccountService {
     val script = AccountsCommunicationOperations.signIn(request)
     val futureTryToken = Free.runFC(script)(interpreter).right.get
     futureTryToken onSuccess {
-      case Success(token) => storeLocalData("auth_token", token)
+      case Success(token) => dataStore.updateAccount(a => a.copy(token = token.token))
       case _ =>
     }
 
